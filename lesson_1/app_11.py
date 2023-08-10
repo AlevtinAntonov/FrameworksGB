@@ -17,7 +17,7 @@ def main():
 @app.route('/data/')
 def data():
     context = {'title': 'База статей'}
-    return render_template('new_data.html', **context)
+    return render_template('task_7.html', **context)
 
 if __name__ == '__main__':
     app.run(debug=True)

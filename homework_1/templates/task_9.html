@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }} - {{ title }}
+{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; padding-top: 5px;padding-bottom: 5px;">
+    {% for line in page_title %}
+    {{ line }} <br>
+    {% endfor %}
+</h1>
+
+<p class="text-info" style="font-size: xx-large; text-align: justify; padding-block: 1em;">{{ task_text }}</p>
+<div style="text-align: center">
+    <div style="text-align: center">
+        <a class="btn btn-primary" href="/shop/" role="button">Перейти в магазин</a>
+    </div>
+</div>
+
+{% endblock %}
