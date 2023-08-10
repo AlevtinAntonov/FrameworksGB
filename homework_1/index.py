@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-from datetime import date, timedelta
 from homework_1.db import _news, _about, _contacts, _clothes, _shoes, _jackets
 
 app = Flask(__name__)
