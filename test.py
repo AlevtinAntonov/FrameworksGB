@@ -1,26 +1,31 @@
-# from datetime import date, timedelta
-#
-# print((date.today() - timedelta(3)).strftime("%d.%m.%Y"))
+from timer import timer, arr
+import threading
 
-lst_news = {'page_title': page_title,
-        'news': ['Новость 1', 'Новость 2', 'Новость 3'],
-        'image': ['/static/image/img2.jpg', '/static/image/img2.jpg', '/static/image/img2.jpg'],
-        'date_public': [(date.today() - timedelta(3)).strftime("%d.%m.%Y"),
-                        (date.today() - timedelta(2)).strftime("%d.%m.%Y"),
-                        (date.today() - timedelta(1)).strftime("%d.%m.%Y"), ],
-        'txt': ["В частности, семантический разбор внешних противодействий влечет за собой процесс внедрения и "
-                "модернизации системы массового участия! Господа, выбранный нами инновационный путь влечет за собой "
-                "процесс внедрения и модернизации первоочередных требований. Предварительные выводы неутешительны: "
-                "внедрение современных методик однозначно фиксирует необходимость первоочередных требований.",
-                "В частности, семантический разбор внешних противодействий влечет за собой процесс внедрения и "
-                "модернизации системы массового участия! Господа, выбранный нами инновационный путь влечет за собой "
-                "процесс внедрения и модернизации первоочередных требований. Предварительные выводы неутешительны: "
-                "внедрение современных методик однозначно фиксирует необходимость первоочередных требований.",
-                "В частности, семантический разбор внешних противодействий влечет за собой процесс внедрения и "
-                "модернизации системы массового участия! Господа, выбранный нами инновационный путь влечет за собой "
-                "процесс внедрения и модернизации первоочередных требований. Предварительные выводы неутешительны: "
-                "внедрение современных методик однозначно фиксирует необходимость первоочередных требований."],
-        }
 
-for i in range(len(lst_news[news])):
-        print(new)
+threads = []
+summa = 0
+num_threads = 4
+
+
+def sum_array(start_idx, end_idx):
+    global summa
+    for i in range(start_idx, end_idx):
+        summa += arr[i]
+
+
+@timer
+def get_summa():
+    for i in range(num_threads):
+        start_idx = i * len(arr) // num_threads
+        end_idx = (i + 1) * len(arr) // num_threads
+        thread = threading.Thread(target=sum_array, args=(start_idx, end_idx))
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+    return summa
+
+
+if __name__ == '__main__':
+    get_summa()
