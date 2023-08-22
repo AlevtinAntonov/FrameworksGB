@@ -18,6 +18,9 @@ class User(BaseModel):
 for i in range(5):
     USERS.append(User(user_id=i, name=f'User_{i}', email=f'user_{i}@domain.ru', password=f'password{i}'))
 print(USERS)
+@app.get("/")
+async def read_item(request: Request):
+    return templates.TemplateResponse('item.html', {'request': request, 'users': USERS})
 
 
 @app.get('/users/')
@@ -49,8 +52,3 @@ async def delete_user(user_id: int, user: User):
             USERS.remove(u)
             return {"status": "Delete success"}
     return HTTPException(404, 'User not found')
-
-
-@app.get("/users-list/")
-async def read_item(request: Request):
-    return templates.TemplateResponse('item.html', {'request': request, 'users': USERS})
